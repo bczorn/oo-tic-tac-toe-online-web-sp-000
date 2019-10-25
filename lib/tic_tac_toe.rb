@@ -74,19 +74,35 @@ class TicTacToe
     @board[combo[0]] == board[combo[1]] && 
     @board[combo[1]] == board[combo[2]] && 
     position_taken?(combo[0])
+    end
   end
-end
 
-def full?
-  @board.all?{|token| token == "X" || token == "O"}
-end
+  def full?
+    @board.all?{|token| token == "X" || token == "O"}
+  end
 
-def draw?
-  full? && !won?
-end
+  def draw?
+    full? && !won?
+  end
 
-def over?
-  won? || draw?
-end
+  def over?
+    won? || draw?
+  end
+  
+  def winner
+    if winning_combo = won?
+      @board[winning_combo.first]
+    end
+  end
+
+  def play
+    while over? == false
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   
 end
